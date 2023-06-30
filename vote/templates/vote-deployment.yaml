@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.appName }}
+  name: {{ .Values.appName }}-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - image: abhijeetnikam1995/vote-j:latest
+        name: {{ .Values.appName }}
+        ports:
+        - containerPort: 80
+          name: {{ .Values.appName }}
